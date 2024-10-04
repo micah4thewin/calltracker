@@ -1,0 +1,89 @@
+/* Custom Styles */
+body {
+    background-color: #f4f6f9;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar-brand {
+    color: #e20074 !important;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.summary-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease, background-color 0.3s ease;
+}
+
+.summary-card.active {
+    filter: grayscale(0%);
+}
+
+.btn-primary {
+    background-color: #e20074;
+    border-color: #e20074;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background-color: #c30068;
+    border-color: #c30068;
+}
+
+.btn-danger {
+    background-color: #333;
+    border-color: #333;
+}
+
+.btn-danger:hover {
+    background-color: #555;
+    border-color: #555;
+}
+
+.btn-tmobile {
+    background-color: #e20074;
+    border-color: #e20074;
+    font-weight: 500;
+}
+
+.btn-tmobile:hover {
+    background-color: #c30068;
+    border-color: #c30068;
+}
+
+.behavior-btn {
+    min-width: 180px;
+    margin: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: 500;
+}
+
+.behavior-btn.active {
+    background-color: #e20074;
+    color: #fff;
+    border-color: #e20074;
+}
+
+.behavior-btn:not(.active) {
+    background-color: #f0f0f0;
+    color: #333;
+    border-color: #ccc;
+}
+
+#behaviorStats li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 576px) {
+    .behavior-btn {
+        min-width: 100%;
+    }
+}
