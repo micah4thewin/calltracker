@@ -1,89 +1,148 @@
+/*
+ * This file is part of Call Tracker.
+ * 
+ * Copyright (C) 2024 Micah Levason.
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ */
+
 /* Custom Styles */
 body {
-    background-color: #f4f6f9;
-    color: #333;
-    font-family: 'Roboto', sans-serif;
+  background-color: #f4f6f9;
+  color: #333;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Example AOS styles */
+[data-aos="fade-out"] {
+  opacity: 0;
+}
+
+[data-aos="fade-in"] {
+  opacity: 1;
 }
 
 .navbar-brand {
-    color: #e20074 !important;
-    font-weight: 700;
-    font-size: 1.5rem;
+  color: #e20074 !important;
+  font-weight: 700;
+  font-size: 1.5rem;
 }
 
 .summary-card {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 25px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: background-color 0.3s ease;
-    filter: grayscale(100%);
-    transition: filter 0.3s ease, background-color 0.3s ease;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease, background-color 0.3s ease;
 }
 
+/* Only apply active styles to summary cards */
 .summary-card.active {
-    filter: grayscale(0%);
+  filter: grayscale(0%);
+  /* Ensure no color or style changes affect buttons inside */
 }
 
+/* Button styles remain unchanged */
 .btn-primary {
-    background-color: #e20074;
-    border-color: #e20074;
-    font-weight: 500;
+  background-color: #e20074;
+  border-color: #e20074;
+  font-weight: 500;
 }
 
 .btn-primary:hover {
-    background-color: #c30068;
-    border-color: #c30068;
+  background-color: #c30068;
+  border-color: #c30068;
+}
+
+.btn-dark {
+  background-color: #333;
+  border-color: #333;
+}
+
+#startCallBtn.active {
+  background-color: #d3d3d3; /* Light grey */
+  border-color: #d3d3d3;
+  color: #333; /* Optional: Change text color for better contrast */
 }
 
 .btn-danger {
-    background-color: #333;
-    border-color: #333;
-}
-
-.btn-danger:hover {
-    background-color: #555;
-    border-color: #555;
+  background-color: #555;
+  border-color: #555;
 }
 
 .btn-tmobile {
-    background-color: #e20074;
-    border-color: #e20074;
-    font-weight: 500;
+  background-color: #e20074;
+  border-color: #e20074;
+  font-weight: 500;
 }
 
 .btn-tmobile:hover {
-    background-color: #c30068;
-    border-color: #c30068;
+  background-color: #c30068;
+  border-color: #c30068;
 }
 
 .behavior-btn {
-    min-width: 180px;
-    margin: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    font-weight: 500;
+  min-width: 180px;
+  margin: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-weight: 500;
 }
 
 .behavior-btn.active {
-    background-color: #e20074;
-    color: #fff;
-    border-color: #e20074;
+  background-color: #e20074;
+  color: #fff;
+  border-color: #e20074;
 }
 
 .behavior-btn:not(.active) {
-    background-color: #f0f0f0;
-    color: #333;
-    border-color: #ccc;
+  background-color: #f0f0f0;
+  color: #333;
+  border-color: #ccc;
+}
+
+.startCallBtn.active {
+  background-color: efefef;
 }
 
 #behaviorStats li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 @media (max-width: 576px) {
-    .behavior-btn {
-        min-width: 100%;
-    }
+  .behavior-btn {
+    min-width: 100%;
+  }
+}
+
+/* Neon Magenta/Pink Progress Bar */
+#behaviorProgress {
+  background-color: #ff00ff; /* Neon Magenta */
+  box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+#behaviorProgress:hover {
+  background-color: #ff1493; /* Deep Pink */
+  box-shadow: 0 0 20px #ff1493, 0 0 30px #ff1493, 0 0 40px #ff1493;
+}
+
+.d-flex.justify-content-end {
+  flex-grow: 1;
+  align-items: center; /* For proper vertical alignment if needed */
+}
+
+.sweetAlert {
+background-color: #ff1493;
 }
