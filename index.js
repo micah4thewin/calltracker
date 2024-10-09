@@ -23,101 +23,102 @@ document.addEventListener("DOMContentLoaded", () => {
       id: "empathy",
       name: "Empathy Statement",
       examples: [
-        "I understand how you feel.",
-        "I can see why that would be frustrating.",
-        "I'm sorry you're experiencing this.",
+        "I truly understand how you feel.",
+        "I can see why that would be frustrating, and I'm here to help.",
+        "I'm genuinely sorry you're experiencing this, let's resolve it together."
       ],
       encouragements: [
-        "Great empathy!",
-        "Empathy at its best!",
-        "You're showing excellent understanding!",
+        "Empathy with impact!",
+        "Your empathy is transformative!",
+        "You're connecting on a deep level!"
       ],
     },
     {
       id: "ownership",
       name: "Ownership Statement",
       examples: [
-        "I will take care of this for you.",
-        "Let me handle that for you.",
-        "I'll ensure this gets resolved.",
+        "I will personally take care of this for you.",
+        "Let me handle that for you, ensuring it's resolved.",
+        "I'll make sure this gets resolved quickly and effectively."
       ],
       encouragements: [
-        "Taking ownership!",
-        "Excellent responsibility!",
-        "Great initiative!",
+        "Exemplary ownership!",
+        "Outstanding responsibility!",
+        "You're leading with initiative!"
       ],
     },
     {
       id: "accountAudit",
-      name: "Account Audit",
+      name: "Account Health Check",
       examples: [
-        "Let me review your account status and balance.",
-        "I'll check your account details.",
-        "Allow me to audit your account for any discrepancies.",
+        "Let me perform a detailed review of your account status.",
+        "I'll ensure your account details are accurate and up-to-date.",
+        "Allow me to audit your account for any discrepancies and ensure optimal health."
       ],
       encouragements: [
-        "Thorough audit!",
-        "Detailed review!",
-        "Comprehensive account check!",
+        "Thorough and precise audit!",
+        "Comprehensive account health check!",
+        "Ensuring account excellence!"
       ],
     },
     {
       id: "checkIssues",
-      name: "Check for Adjacent Issues",
+      name: "Proactive Issue Resolution",
       examples: [
-        "Is there anything else I can assist you with?",
-        "Do you have any other concerns?",
-        "Can I help you with anything else today?",
+        "Is there anything else I can assist you with to enhance your experience?",
+        "Do you have any other concerns that I can address right now?",
+        "Can I help you with anything else today to ensure complete satisfaction?"
       ],
       encouragements: [
-        "Proactive support!",
-        "Great initiative to help further!",
-        "Ensuring complete assistance!",
+        "Proactive and comprehensive support!",
+        "Excellent initiative in resolving issues!",
+        "Ensuring complete customer satisfaction!"
       ],
     },
     {
       id: "nbaTool",
-      name: "NBA Tool Offer",
+      name: "Enhance Value Offer",
       examples: [
-        "I have some offers that might interest you.",
-        "Let me share some exclusive deals with you.",
-        "Would you like to hear about our latest offers?",
+        "I have some exclusive offers that might enhance your experience.",
+        "Let me share some deals that add great value for you.",
+        "Would you like to hear about our latest offers that could benefit you?"
       ],
       encouragements: [
-        "Offering great deals!",
-        "Excellent offer presentation!",
-        "Great value proposition!",
+        "Offering exceptional value!",
+        "Excellent presentation of offers!",
+        "Providing valuable enhancements!"
       ],
     },
     {
       id: "selfHelp",
-      name: "Self Help Information",
+      name: "Teach Self-Sufficiency",
       examples: [
-        "I can send you a link with helpful information.",
-        "Would you like some resources to help you further?",
-        "Let me provide you with some self-help materials.",
+        "I can send you a link with resources to empower your self-service capabilities.",
+        "Would you like some tools to help you manage things independently?",
+        "Let me provide you with materials that enhance your self-sufficiency."
       ],
       encouragements: [
-        "Empowering the customer!",
-        "Great support with resources!",
-        "Providing valuable information!",
+        "Empowering customers through knowledge!",
+        "Supporting independence with resources!",
+        "Providing valuable self-help tools!"
       ],
     },
     {
       id: "callRecap",
-      name: "Call Recap",
+      name: "Resolution Summary",
       examples: [
-        "To recap, here is what we discussed today...",
-        "Let me summarize our conversation.",
-        "Here's a summary of our call.",
+        "To summarize, here's what we resolved today...",
+        "Let me recap our conversation to ensure clarity.",
+        "Here's a summary of our call, confirming all details discussed."
       ],
       encouragements: [
-        "Clear recap!",
-        "Excellent summary!",
-        "Well-articulated recap!",
+        "Clear and concise recap!",
+        "Excellent summary ensuring understanding!",
+        "Well-articulated resolution summary!"
       ],
     },
   ];
+  
 
   // Helper function to get a random item from an array
   function getRandomItem(arr) {
