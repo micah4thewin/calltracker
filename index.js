@@ -291,57 +291,68 @@ document.addEventListener("DOMContentLoaded", () => {
     startCallCard.style.display = "none";
   });
 
-  // ASCII T-Mobile T Logo
   const cat = `
- /\_/\  
-( o.o ) 
- > ^ <
+  /\\_/\\
+ ( o.o )
+  > ^ <
 `;
 
+console.log(cat);
+
+
   // End Call Session with Auto-Copy
-  endCallBtn.addEventListener("click", () => {
-    if (!currentCall) return;
+// End Call Session with Auto-Copy
+endCallBtn.addEventListener("click", () => {
+  if (!currentCall) return;
 
-    // Construct Call Recap
-    let callRecap = `Call Recap:\nBehaviors Completed:\n${
-      currentCall.behaviors.join(", ") || "None"
-    }\n\n`;
-    let fullRecap = `${cat}\nI tracked this call. You can track yours too!\nhttps://micah4thewin.github.io/calltracker/ \n${callRecap}`;
-
-    // Copy Recap to Clipboard
-    navigator.clipboard
-      .writeText(fullRecap)
-      .then(() => {
-        Swal.fire({
-          icon: "success",
-          title: "Great job!",
-          text: "Call recap copied to clipboard!",
-          timer: 1200,
-          showConfirmButton: false,
-        });
-        console.log("Call recap copied to clipboard!");
-      })
-      .catch((err) => {
-        console.error("Error copying text: ", err);
-      });
-
-    // Reset and update UI
-    dailyData.calls.push(currentCall);
-    currentCall = null;
-    startCallBtn.classList.remove("active");
-    behaviorSection.classList.add("d-none");
-    resetBehaviorButtons();
-    summaryCards.forEach((card) => card.classList.remove("active"));
-    updateProgress();
-    updateSummary();
-    saveData();
-
-    // Reset background color after call ends
-    document.body.style.backgroundColor = "#f4f6f9";
-    startCallCard.style.display = "block";
-
-    AOS.refresh(); // Refresh AOS to apply animations
+  // Map behavior IDs to their full names
+  const behaviorNames = currentCall.behaviors.map(id => {
+    const behavior = behaviorsConfig.find(b => b.id === id);
+    return behavior ? behavior.name : id;
   });
+
+  // Construct Call Recap
+  let callRecap = `Call Recap:\n${
+    behaviorNames.join(", ") || "None"
+  }\n\n`;
+  
+  let fullRecap = `${cat}\nhttps://micah4thewin.github.io/calltracker/ \n${callRecap}`;
+
+  // Copy Recap to Clipboard
+  navigator.clipboard
+    .writeText(fullRecap)
+    .then(() => {
+      Swal.fire({
+        icon: "success",
+        title: "Great job!",
+        text: "Call recap copied to clipboard!",
+        timer: 1200,
+        showConfirmButton: false,
+      });
+      console.log("Call recap copied to clipboard!");
+    })
+    .catch((err) => {
+      console.error("Error copying text: ", err);
+    });
+
+  // Reset and update UI
+  dailyData.calls.push(currentCall);
+  currentCall = null;
+  startCallBtn.classList.remove("active");
+  behaviorSection.classList.add("d-none");
+  resetBehaviorButtons();
+  summaryCards.forEach((card) => card.classList.remove("active"));
+  updateProgress();
+  updateSummary();
+  saveData();
+
+  // Reset background color after call ends
+  document.body.style.backgroundColor = "#f4f6f9";
+  startCallCard.style.display = "block";
+
+  AOS.refresh(); // Refresh AOS to apply animations
+});
+
 
   // Reset Behavior Buttons
   function resetBehaviorButtons() {
