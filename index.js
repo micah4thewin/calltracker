@@ -62,18 +62,18 @@ document.addEventListener("DOMContentLoaded", () => {
         ],
     },
     {
-        id: "checkIssues",
-        name: "Proactive Issue Resolution",
-        examples: [
-            "Is there anything else I can assist you with to enhance your experience?",
-            "Do you have any other concerns that I can address right now?",
-            "Can I help you with anything else today to ensure complete satisfaction?"
+        "id": "collectPastDue",
+        "name": "Past Due Collection",
+        "examples": [
+            "I notice your account is past due. Can we set up a payment arrangement today?",
+            "Your account doesn't have a payment method for future payments. Would you like to add one now?",
+            "To avoid further late fees, shall we discuss payment options for your overdue balance?"
         ],
-        encouragements: [
-            "Proactive and comprehensive support!",
-            "Excellent initiative in resolving issues!",
-            "Ensuring complete customer satisfaction!"
-        ],
+        "encouragements": [
+            "Proactive approach to resolving overdue accounts!",
+            "Excellent initiative in securing future payments!",
+            "Ensuring timely collection while maintaining customer relationships!"
+        ]
     },
     {
         id: "nbaTool",
