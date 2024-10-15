@@ -146,3 +146,15 @@ body {
 .sweetAlert {
 background-color: #ff1493;
 }
+
+/* Timer Styling */
+#callTimer {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2e8b57; /* Calm green */
+  transition: color 0.5s ease;
+}
+
+#callTimer.time-exceeded {
+  color: #ff4500; /* Orange red indicating time exceeded */
+}
