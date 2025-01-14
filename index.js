@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     AOS.init();
 
   // Configuration Object for Behaviors
-  const behaviorsConfig = [
+const behaviorsConfig = [
     {
         id: "empathy",
         name: "Empathy Statement",
@@ -48,6 +48,34 @@ document.addEventListener("DOMContentLoaded", () => {
         ],
     },
     {
+        id: "confidence",
+        name: "Confidence Statement",
+        examples: [
+            "I’m glad to assist you with this today.",
+            "Let me provide you with the solution right away.",
+            "I’m confident we’ll resolve this for you smoothly."
+        ],
+        encouragements: [
+            "Commanding confidence!",
+            "Leading with expertise!",
+            "You’re inspiring trust and assurance!"
+        ],
+    },
+    {
+        id: "personalization",
+        name: "Personalization",
+        examples: [
+            "Thank you so much for being such a loyal customer!",
+            "I love how proactive you’ve been with your account.",
+            "It’s great to hear you’re making the most of our services."
+        ],
+        encouragements: [
+            "Bringing a personal touch!",
+            "Building strong customer connections!",
+            "Personalization at its best!"
+        ],
+    },
+    {
         id: "accountAudit",
         name: "Account Health Check",
         examples: [
@@ -62,18 +90,18 @@ document.addEventListener("DOMContentLoaded", () => {
         ],
     },
     {
-        "id": "collectPastDue",
-        "name": "Past Due Collection",
-        "examples": [
+        id: "collectPastDue",
+        name: "Past Due Collection",
+        examples: [
             "I notice your account is past due. Can we set up a payment arrangement today?",
             "Your account doesn't have a payment method for future payments. Would you like to add one now?",
             "To avoid further late fees, shall we discuss payment options for your overdue balance?"
         ],
-        "encouragements": [
+        encouragements: [
             "Proactive approach to resolving overdue accounts!",
             "Excellent initiative in securing future payments!",
             "Ensuring timely collection while maintaining customer relationships!"
-        ]
+        ],
     },
     {
         id: "nbaTool",
@@ -117,7 +145,50 @@ document.addEventListener("DOMContentLoaded", () => {
             "Well-articulated resolution summary!"
         ],
     },
+    {
+        id: "pride",
+        name: "Pride in Service",
+        examples: [
+            "At T-Mobile, we take pride in ensuring customer satisfaction.",
+            "I’m proud to offer you the best solutions today.",
+            "It’s my pleasure to provide you with top-notch support."
+        ],
+        encouragements: [
+            "Outstanding representation of pride!",
+            "Elevating the customer experience!",
+            "Radiating positivity and excellence!"
+        ],
+    },
+    {
+        id: "proactiveFuture",
+        name: "Solve the Next Call",
+        examples: [
+            "Let’s set up Autopay to make things easier moving forward.",
+            "I see your handset is not 5G-compatible. Would you like to explore upgrade options?",
+            "I'll make sure we proactively address any future issues for you."
+        ],
+        encouragements: [
+            "Staying one step ahead!",
+            "Proactively solving future concerns!",
+            "Setting customers up for success!"
+        ],
+    },
+    {
+        id: "efficiency",
+        name: "Efficiency in Action",
+        examples: [
+            "Let me quickly handle that for you while I check the system.",
+            "I’ll prioritize efficiency to get this resolved immediately.",
+            "I’m multitasking to ensure this is done promptly and correctly."
+        ],
+        encouragements: [
+            "Masterful multitasking!",
+            "Seamless and efficient handling!",
+            "Delivering quick solutions with precision!"
+        ],
+    },
 ];
+
 
     // Helper function to get a random item from an array
     function getRandomItem(arr) {
