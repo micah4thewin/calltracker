@@ -19,175 +19,177 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Configuration Object for Behaviors
 const behaviorsConfig = [
-    {
-        id: "empathy",
-        name: "Empathy Statement",
-        examples: [
-            "I truly understand how you feel.",
-            "I can see why that would be frustrating, and I'm here to help.",
-            "I'm genuinely sorry you're experiencing this, let's resolve it together."
-        ],
-        encouragements: [
-            "Empathy with impact!",
-            "Your empathy is transformative!",
-            "You're connecting on a deep level!"
-        ],
-    },
-    {
-        id: "ownership",
-        name: "Ownership Statement",
-        examples: [
-            "I will personally take care of this for you.",
-            "Let me handle that for you, ensuring it's resolved.",
-            "I'll make sure this gets resolved quickly and effectively."
-        ],
-        encouragements: [
-            "Exemplary ownership!",
-            "Outstanding responsibility!",
-            "You're leading with initiative!"
-        ],
-    },
-    {
-        id: "confidence",
-        name: "Confidence Statement",
-        examples: [
-            "I’m glad to assist you with this today.",
-            "Let me provide you with the solution right away.",
-            "I’m confident we’ll resolve this for you smoothly."
-        ],
-        encouragements: [
-            "Commanding confidence!",
-            "Leading with expertise!",
-            "You’re inspiring trust and assurance!"
-        ],
-    },
-    {
-        id: "personalization",
-        name: "Personalization",
-        examples: [
-            "Thank you so much for being such a loyal customer!",
-            "I love how proactive you’ve been with your account.",
-            "It’s great to hear you’re making the most of our services."
-        ],
-        encouragements: [
-            "Bringing a personal touch!",
-            "Building strong customer connections!",
-            "Personalization at its best!"
-        ],
-    },
-    {
-        id: "accountAudit",
-        name: "Account Health Check",
-        examples: [
-            "Let me perform a detailed review of your account status.",
-            "I'll ensure your account details are accurate and up-to-date.",
-            "Allow me to audit your account for any discrepancies and ensure optimal health."
-        ],
-        encouragements: [
-            "Thorough and precise audit!",
-            "Comprehensive account health check!",
-            "Ensuring account excellence!"
-        ],
-    },
-    {
-        id: "collectPastDue",
-        name: "Past Due Collection",
-        examples: [
-            "I notice your account is past due. Can we set up a payment arrangement today?",
-            "Your account doesn't have a payment method for future payments. Would you like to add one now?",
-            "To avoid further late fees, shall we discuss payment options for your overdue balance?"
-        ],
-        encouragements: [
-            "Proactive approach to resolving overdue accounts!",
-            "Excellent initiative in securing future payments!",
-            "Ensuring timely collection while maintaining customer relationships!"
-        ],
-    },
-    {
-        id: "nbaTool",
-        name: "Enhance Value Offer",
-        examples: [
-            "I have some exclusive offers that might enhance your experience.",
-            "Let me share some deals that add great value for you.",
-            "Would you like to hear about our latest offers that could benefit you?"
-        ],
-        encouragements: [
-            "Offering exceptional value!",
-            "Excellent presentation of offers!",
-            "Providing valuable enhancements!"
-        ],
-    },
-    {
-        id: "selfHelp",
-        name: "Teach Self-Sufficiency",
-        examples: [
-            "I can send you a link with resources to empower your self-service capabilities.",
-            "Would you like some tools to help you manage things independently?",
-            "Let me provide you with materials that enhance your self-sufficiency."
-        ],
-        encouragements: [
-            "Empowering customers through knowledge!",
-            "Supporting independence with resources!",
-            "Providing valuable self-help tools!"
-        ],
-    },
-    {
-        id: "callRecap",
-        name: "Resolution Summary",
-        examples: [
-            "To summarize, here's what we resolved today...",
-            "Let me recap our conversation to ensure clarity.",
-            "Here's a summary of our call, confirming all details discussed."
-        ],
-        encouragements: [
-            "Clear and concise recap!",
-            "Excellent summary ensuring understanding!",
-            "Well-articulated resolution summary!"
-        ],
-    },
-    {
-        id: "pride",
-        name: "Pride in Service",
-        examples: [
-            "At T-Mobile, we take pride in ensuring customer satisfaction.",
-            "I’m proud to offer you the best solutions today.",
-            "It’s my pleasure to provide you with top-notch support."
-        ],
-        encouragements: [
-            "Outstanding representation of pride!",
-            "Elevating the customer experience!",
-            "Radiating positivity and excellence!"
-        ],
-    },
-    {
-        id: "proactiveFuture",
-        name: "Solve the Next Call",
-        examples: [
-            "Let’s set up Autopay to make things easier moving forward.",
-            "I see your handset is not 5G-compatible. Would you like to explore upgrade options?",
-            "I'll make sure we proactively address any future issues for you."
-        ],
-        encouragements: [
-            "Staying one step ahead!",
-            "Proactively solving future concerns!",
-            "Setting customers up for success!"
-        ],
-    },
-    {
-        id: "efficiency",
-        name: "Efficiency in Action",
-        examples: [
-            "Let me quickly handle that for you while I check the system.",
-            "I’ll prioritize efficiency to get this resolved immediately.",
-            "I’m multitasking to ensure this is done promptly and correctly."
-        ],
-        encouragements: [
-            "Masterful multitasking!",
-            "Seamless and efficient handling!",
-            "Delivering quick solutions with precision!"
-        ],
-    },
+  {
+    id: "empathy",
+    name: "Empathy Statement",
+    examples: [
+      "I truly understand how you feel.",
+      "I can see why that would be frustrating, and I'm here to help.",
+      "I'm genuinely sorry you're experiencing this, let's resolve it together."
+    ],
+    encouragements: [
+      "Empathy with impact!",
+      "Your empathy is transformative!",
+      "You're connecting on a deep level!"
+    ],
+  },
+  {
+    id: "ownership",
+    name: "Ownership Statement",
+    examples: [
+      "I will personally take care of this for you.",
+      "Let me handle that for you, ensuring it's resolved.",
+      "I'll make sure this gets resolved quickly and effectively."
+    ],
+    encouragements: [
+      "Exemplary ownership!",
+      "Outstanding responsibility!",
+      "You're leading with initiative!"
+    ],
+  },
+  {
+    id: "confidence",
+    name: "Confidence Statement",
+    examples: [
+      "I’m glad to assist you with this today.",
+      "Let me provide you with the solution right away.",
+      "I’m confident we’ll resolve this for you smoothly."
+    ],
+    encouragements: [
+      "Commanding confidence!",
+      "Leading with expertise!",
+      "You’re inspiring trust and assurance!"
+    ],
+  },
+  {
+    id: "accountAudit",
+    name: "Account Health Check",
+    examples: [
+      "Let me perform a detailed review of your account status.",
+      "I'll ensure your account details are accurate and up-to-date.",
+      "Allow me to audit your account for any discrepancies and ensure optimal health."
+    ],
+    encouragements: [
+      "Thorough and precise audit!",
+      "Comprehensive account health check!",
+      "Ensuring account excellence!"
+    ],
+  },
+  {
+    id: "collectPastDue",
+    name: "Past Due Collection",
+    examples: [
+      "I notice your account is past due. Can we set up a payment arrangement today?",
+      "Your account doesn't have a payment method for future payments. Would you like to add one now?",
+      "To avoid further late fees, shall we discuss payment options for your overdue balance?"
+    ],
+    encouragements: [
+      "Proactive approach to resolving overdue accounts!",
+      "Excellent initiative in securing future payments!",
+      "Ensuring timely collection while maintaining customer relationships!"
+    ],
+  },
+  {
+    id: "nbaTool",
+    name: "Enhance Value Offer",
+    examples: [
+      "I have some exclusive offers that might enhance your experience.",
+      "Let me share some deals that add great value for you.",
+      "Would you like to hear about our latest offers that could benefit you?"
+    ],
+    encouragements: [
+      "Offering exceptional value!",
+      "Excellent presentation of offers!",
+      "Providing valuable enhancements!"
+    ],
+  },
+  {
+    id: "selfHelp",
+    name: "Teach Self-Sufficiency",
+    examples: [
+      "I can send you a link with resources to empower your self-service capabilities.",
+      "Would you like some tools to help you manage things independently?",
+      "Let me provide you with materials that enhance your self-sufficiency."
+    ],
+    encouragements: [
+      "Empowering customers through knowledge!",
+      "Supporting independence with resources!",
+      "Providing valuable self-help tools!"
+    ],
+  },
+  {
+    id: "callRecap",
+    name: "Resolution Summary",
+    examples: [
+      "To summarize, here's what we resolved today...",
+      "Let me recap our conversation to ensure clarity.",
+      "Here's a summary of our call, confirming all details discussed."
+    ],
+    encouragements: [
+      "Clear and concise recap!",
+      "Excellent summary ensuring understanding!",
+      "Well-articulated resolution summary!"
+    ],
+  },
+  {
+    id: "proactiveFuture",
+    name: "Solve the Next Call",
+    examples: [
+      "Let’s set up Autopay to make things easier moving forward.",
+      "I see your handset is not 5G-compatible. Would you like to explore upgrade options?",
+      "I'll make sure we proactively address any future issues for you."
+    ],
+    encouragements: [
+      "Staying one step ahead!",
+      "Proactively solving future concerns!",
+      "Setting customers up for success!"
+    ],
+  },
+  {
+    id: "efficiency",
+    name: "Efficiency in Action",
+    examples: [
+      "Let me quickly handle that for you while I check the system.",
+      "I’ll prioritize efficiency to get this resolved immediately.",
+      "I’m multitasking to ensure this is done promptly and correctly."
+    ],
+    encouragements: [
+      "Masterful multitasking!",
+      "Seamless and efficient handling!",
+      "Delivering quick solutions with precision!"
+    ],
+  },
+  // New Behaviors:
+  {
+    id: "personalGuarantee",
+    name: "Send Your Personal Guarantee",
+    examples: [
+      "I’m sending you a personal guarantee message via Atlas Messaging to confirm we’ll resolve this for you.",
+      "Let me provide a quick text through Atlas Messaging assuring you we’ve got this covered.",
+      "I’ll follow up with a personalized guarantee in Atlas Messaging so you have peace of mind."
+    ],
+    encouragements: [
+      "Building strong customer confidence!",
+      "A personal guarantee is a powerful trust-builder!",
+      "Reassuring customers with a personal touch!"
+    ],
+  },
+  {
+    id: "fixFlow",
+    name: "Used the Fix Flow",
+    examples: [
+      "I’m following our Fix Flow to systematically troubleshoot the issue.",
+      "Let me walk through the Fix Flow steps to ensure we find the right resolution.",
+      "We’ll rely on the Fix Flow tool to cover all possible troubleshooting paths."
+    ],
+    encouragements: [
+      "Great job utilizing the Fix Flow!",
+      "Ensuring thorough troubleshooting!",
+      "Leveraging the right tool for accurate solutions!"
+    ],
+  },
 ];
+
 
 
     // Helper function to get a random item from an array
