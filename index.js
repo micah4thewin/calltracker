@@ -20,175 +20,127 @@ document.addEventListener("DOMContentLoaded", () => {
   // Configuration Object for Behaviors
 const behaviorsConfig = [
   {
-    id: "empathy",
-    name: "Empathy Statement",
+    id: "useVEA",
+    name: "Use VEA",
     examples: [
-      "I truly understand how you feel.",
-      "I can see why that would be frustrating, and I'm here to help.",
-      "I'm genuinely sorry you're experiencing this, let's resolve it together."
+      "Let me leverage VEA to find the best solution for you.",
+      "I'll consult with VEA to resolve this efficiently.",
+      "Using VEA, I'll ensure we address this issue effectively."
     ],
     encouragements: [
-      "Empathy with impact!",
-      "Your empathy is transformative!",
-      "You're connecting on a deep level!"
-    ],
-  },
-  {
-    id: "ownership",
-    name: "Ownership Statement",
-    examples: [
-      "I will personally take care of this for you.",
-      "Let me handle that for you, ensuring it's resolved.",
-      "I'll make sure this gets resolved quickly and effectively."
-    ],
-    encouragements: [
-      "Exemplary ownership!",
-      "Outstanding responsibility!",
-      "You're leading with initiative!"
-    ],
-  },
-  {
-    id: "confidence",
-    name: "Confidence Statement",
-    examples: [
-      "I’m glad to assist you with this today.",
-      "Let me provide you with the solution right away.",
-      "I’m confident we’ll resolve this for you smoothly."
-    ],
-    encouragements: [
-      "Commanding confidence!",
-      "Leading with expertise!",
-      "You’re inspiring trust and assurance!"
-    ],
-  },
-  {
-    id: "accountAudit",
-    name: "Account Health Check",
-    examples: [
-      "Let me perform a detailed review of your account status.",
-      "I'll ensure your account details are accurate and up-to-date.",
-      "Allow me to audit your account for any discrepancies and ensure optimal health."
-    ],
-    encouragements: [
-      "Thorough and precise audit!",
-      "Comprehensive account health check!",
-      "Ensuring account excellence!"
-    ],
-  },
-  {
-    id: "collectPastDue",
-    name: "Past Due Collection",
-    examples: [
-      "I notice your account is past due. Can we set up a payment arrangement today?",
-      "Your account doesn't have a payment method for future payments. Would you like to add one now?",
-      "To avoid further late fees, shall we discuss payment options for your overdue balance?"
-    ],
-    encouragements: [
-      "Proactive approach to resolving overdue accounts!",
-      "Excellent initiative in securing future payments!",
-      "Ensuring timely collection while maintaining customer relationships!"
-    ],
-  },
-  {
-    id: "nbaTool",
-    name: "Enhance Value Offer",
-    examples: [
-      "I have some exclusive offers that might enhance your experience.",
-      "Let me share some deals that add great value for you.",
-      "Would you like to hear about our latest offers that could benefit you?"
-    ],
-    encouragements: [
-      "Offering exceptional value!",
-      "Excellent presentation of offers!",
-      "Providing valuable enhancements!"
-    ],
-  },
-  {
-    id: "selfHelp",
-    name: "Teach Self-Sufficiency",
-    examples: [
-      "I can send you a link with resources to empower your self-service capabilities.",
-      "Would you like some tools to help you manage things independently?",
-      "Let me provide you with materials that enhance your self-sufficiency."
-    ],
-    encouragements: [
-      "Empowering customers through knowledge!",
-      "Supporting independence with resources!",
-      "Providing valuable self-help tools!"
-    ],
-  },
-  {
-    id: "callRecap",
-    name: "Resolution Summary",
-    examples: [
-      "To summarize, here's what we resolved today...",
-      "Let me recap our conversation to ensure clarity.",
-      "Here's a summary of our call, confirming all details discussed."
-    ],
-    encouragements: [
-      "Clear and concise recap!",
-      "Excellent summary ensuring understanding!",
-      "Well-articulated resolution summary!"
-    ],
-  },
-  {
-    id: "proactiveFuture",
-    name: "Solve the Next Call",
-    examples: [
-      "Let’s set up Autopay to make things easier moving forward.",
-      "I see your handset is not 5G-compatible. Would you like to explore upgrade options?",
-      "I'll make sure we proactively address any future issues for you."
-    ],
-    encouragements: [
-      "Staying one step ahead!",
-      "Proactively solving future concerns!",
-      "Setting customers up for success!"
-    ],
-  },
-  {
-    id: "efficiency",
-    name: "Efficiency in Action",
-    examples: [
-      "Let me quickly handle that for you while I check the system.",
-      "I’ll prioritize efficiency to get this resolved immediately.",
-      "I’m multitasking to ensure this is done promptly and correctly."
-    ],
-    encouragements: [
-      "Masterful multitasking!",
-      "Seamless and efficient handling!",
-      "Delivering quick solutions with precision!"
-    ],
-  },
-  // New Behaviors:
-  {
-    id: "personalGuarantee",
-    name: "Send Your Personal Guarantee",
-    examples: [
-      "I’m sending you a personal guarantee message via Atlas Messaging to confirm we’ll resolve this for you.",
-      "Let me provide a quick text through Atlas Messaging assuring you we’ve got this covered.",
-      "I’ll follow up with a personalized guarantee in Atlas Messaging so you have peace of mind."
-    ],
-    encouragements: [
-      "Building strong customer confidence!",
-      "A personal guarantee is a powerful trust-builder!",
-      "Reassuring customers with a personal touch!"
+      "Great use of VEA!"
     ],
   },
   {
     id: "fixFlow",
-    name: "Used the Fix Flow",
+    name: "Use the Fix Flow",
     examples: [
-      "I’m following our Fix Flow to systematically troubleshoot the issue.",
-      "Let me walk through the Fix Flow steps to ensure we find the right resolution.",
-      "We’ll rely on the Fix Flow tool to cover all possible troubleshooting paths."
+      "I'm following our Fix Flow to troubleshoot this systematically.",
+      "Let's use the Fix Flow to make sure we cover all bases.",
+      "The Fix Flow will guide us to the right solution."
     ],
     encouragements: [
-      "Great job utilizing the Fix Flow!",
-      "Ensuring thorough troubleshooting!",
-      "Leveraging the right tool for accurate solutions!"
+      "Nice work using the Fix Flow!"
     ],
   },
+  {
+    id: "assureCallback",
+    name: "Assure No Callback",
+    examples: [
+      "I'm here to make sure you don't have to call back, thank you for your time.",
+      "Let's get this sorted so you don't need to call back.",
+      "Your time is important, I'll resolve this to avoid future calls."
+    ],
+    encouragements: [
+      "Excellent focus on customer satisfaction!"
+    ],
+  },
+  {
+    id: "accountDetails",
+    name: "Go Over Account Details",
+    examples: [
+      "Let's review your current plan to see if you're missing out on any features.",
+      "Checking your account, I see you might not be using all your benefits.",
+      "Here's how we can enhance your experience with your current plan."
+    ],
+    encouragements: [
+      "Good eye for detail!"
+    ],
+  },
+  {
+    id: "checkAdjacent",
+    name: "Check for Adjacent Issues",
+    examples: [
+      "Before we dive in, let's make sure there's nothing else we need to address.",
+      "Did we overlook another issue that needs attention?",
+      "Let's tackle all related concerns upfront for efficiency."
+    ],
+    encouragements: [
+      "Efficient thinking!"
+    ],
+  },
+  {
+    id: "selfHelp",
+    name: "Send Self Help Links",
+    examples: [
+      "I'll email you some self-help resources so you can manage this issue later.",
+      "Here's a link with tools to help you troubleshoot in the future.",
+      "I'm sending you an email with guides for your account management."
+    ],
+    encouragements: [
+      "Empowering customers with resources!"
+    ],
+  },
+  {
+    id: "tLifeApp",
+    name: "Inform About T-Life App",
+    examples: [
+      "Did you know we have a new T-Life app? It can really enhance your T-Mobile experience.",
+      "I recommend our new T-Life app for better control over your account.",
+      "You might want to check out the T-Life app for more features."
+    ],
+    encouragements: [
+      "Sharing the value of T-Life!"
+    ],
+  },
+  {
+    id: "personalGuarantee",
+    name: "Send Personal Guarantee SMS",
+    examples: [
+      "I’m sending you a quick text to assure you we’ve got this covered.",
+      "Here’s a personal guarantee message to give you peace of mind.",
+      "I'll follow up with a text so you know we're committed to your satisfaction."
+    ],
+    encouragements: [
+      "Exemplary trust-building!"
+    ],
+  },
+  {
+    id: "collectPastDue",
+    name: "Account Status Check",
+    examples: [
+      "I noticed your account is past due, can we discuss a payment?",
+      "To keep your service running smoothly, let's update your payment.",
+      "Would you like to secure your service by adding a payment method?"
+    ],
+    encouragements: [
+      "Proactive billing support!"
+    ],
+  },
+  {
+    id: "noCallbackEnd",
+    name: "Reinforce No Callback",
+    examples: [
+      "Remember, you don't need to call back, we've got this covered.",
+      "I've made sure you won't need to call us again for this issue.",
+      "No need to call back, everything is settled."
+    ],
+    encouragements: [
+      "Exceptional customer assurance!"
+    ],
+  }
 ];
+
 
 
 
@@ -602,9 +554,10 @@ const behaviorsConfig = [
     behaviorsList.addEventListener("click", updateProgress);
 
     // ASCII Art for Call Recap
-    const cat = `
-/\\_/\\
-( o.o )
-> ^ <
+const cat = `
+▗▄▄▄▄▄▖
+▐  T  ▌
+▝▀▀▀▀▀▘
 `;
+
 });
