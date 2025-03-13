@@ -555,11 +555,7 @@ const behaviorsConfig = [
 
     // ASCII Art for Call Recap
 const cat = `
-████████
-   ██   
-   ██   
-   ██   
-   ██   
+T-Mobile
 `;
 
 
