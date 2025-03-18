@@ -18,132 +18,69 @@ document.addEventListener("DOMContentLoaded", () => {
     AOS.init();
 
   // Configuration Object for Behaviors
-const behaviorsConfig = [
-  {
-    id: "useVEA",
-    name: "Use VEA",
-    examples: [
-      "Let me leverage VEA to find the best solution for you.",
-      "I'll consult with VEA to resolve this efficiently.",
-      "Using VEA, I'll ensure we address this issue effectively."
-    ],
-    encouragements: [
-      "Great use of VEA!"
-    ],
-  },
-  {
-    id: "fixFlow",
-    name: "Use the Fix Flow",
-    examples: [
-      "I'm following our Fix Flow to troubleshoot this systematically.",
-      "Let's use the Fix Flow to make sure we cover all bases.",
-      "The Fix Flow will guide us to the right solution."
-    ],
-    encouragements: [
-      "Nice work using the Fix Flow!"
-    ],
-  },
-  {
-    id: "assureCallback",
-    name: "Assure No Callback",
-    examples: [
-      "I'm here to make sure you don't have to call back, thank you for your time.",
-      "Let's get this sorted so you don't need to call back.",
-      "Your time is important, I'll resolve this to avoid future calls."
-    ],
-    encouragements: [
-      "Excellent focus on customer satisfaction!"
-    ],
-  },
-  {
-    id: "accountDetails",
-    name: "Go Over Account Details",
-    examples: [
-      "Let's review your current plan to see if you're missing out on any features.",
-      "Checking your account, I see you might not be using all your benefits.",
-      "Here's how we can enhance your experience with your current plan."
-    ],
-    encouragements: [
-      "Good eye for detail!"
-    ],
-  },
-  {
-    id: "checkAdjacent",
-    name: "Check for Adjacent Issues",
-    examples: [
-      "Before we dive in, let's make sure there's nothing else we need to address.",
-      "Did we overlook another issue that needs attention?",
-      "Let's tackle all related concerns upfront for efficiency."
-    ],
-    encouragements: [
-      "Efficient thinking!"
-    ],
-  },
-  {
-    id: "selfHelp",
-    name: "Send Self Help Links",
-    examples: [
-      "I'll email you some self-help resources so you can manage this issue later.",
-      "Here's a link with tools to help you troubleshoot in the future.",
-      "I'm sending you an email with guides for your account management."
-    ],
-    encouragements: [
-      "Empowering customers with resources!"
-    ],
-  },
-  {
-    id: "tLifeApp",
-    name: "Inform About T-Life App",
-    examples: [
-      "Did you know we have a new T-Life app? It can really enhance your T-Mobile experience.",
-      "I recommend our new T-Life app for better control over your account.",
-      "You might want to check out the T-Life app for more features."
-    ],
-    encouragements: [
-      "Sharing the value of T-Life!"
-    ],
-  },
-  {
-    id: "personalGuarantee",
-    name: "Send Personal Guarantee SMS",
-    examples: [
-      "I’m sending you a quick text to assure you we’ve got this covered.",
-      "Here’s a personal guarantee message to give you peace of mind.",
-      "I'll follow up with a text so you know we're committed to your satisfaction."
-    ],
-    encouragements: [
-      "Exemplary trust-building!"
-    ],
-  },
-  {
-    id: "collectPastDue",
-    name: "Account Status Check",
-    examples: [
-      "I noticed your account is past due, can we discuss a payment?",
-      "To keep your service running smoothly, let's update your payment.",
-      "Would you like to secure your service by adding a payment method?"
-    ],
-    encouragements: [
-      "Proactive billing support!"
-    ],
-  },
-  {
-    id: "noCallbackEnd",
-    name: "Reinforce No Callback",
-    examples: [
-      "Remember, you don't need to call back, we've got this covered.",
-      "I've made sure you won't need to call us again for this issue.",
-      "No need to call back, everything is settled."
-    ],
-    encouragements: [
-      "Exceptional customer assurance!"
-    ],
-  }
-];
-
-
-
-
+  const behaviorsConfig = [
+    {
+      id: "fixFlow",
+      name: "Use the Fix Flow",
+      examples: [
+        "I'm following our Fix Flow to troubleshoot this systematically.",
+        "Let's use the Fix Flow to make sure we cover all bases.",
+        "The Fix Flow will guide us to the right solution."
+      ],
+      encouragements: [
+        "Nice work using the Fix Flow!"
+      ],
+    },
+    {
+      id: "personalGuarantee",
+      name: "Send Personal Guarantee SMS",
+      examples: [
+        "I'm sending you a quick text to assure you we've got this covered.",
+        "Here's a personal guarantee message to give you peace of mind.",
+        "I'll follow up with a text so you know we're committed to your satisfaction."
+      ],
+      encouragements: [
+        "Exemplary trust-building!"
+      ],
+    },
+    {
+      id: "tLifeAppLogin",
+      name: "Guide T-Life App Login",
+      examples: [
+        "Let's get you logged into the T-Life app so you can manage your account on the go.",
+        "Have you downloaded our T-Life app? I can help you log in right now.",
+        "The T-Life app gives you instant account access - let me guide you through the setup."
+      ],
+      encouragements: [
+        "Great job helping with app access!"
+      ],
+    },
+    {
+      id: "planBenefits",
+      name: "Highlight 3+ Plan Benefits",
+      examples: [
+        "Your plan includes three amazing benefits: unlimited streaming, international texting, and hotspot data.",
+        "Did you know your rate plan comes with premium video streaming, 5G access, and free international roaming?",
+        "Let me tell you about three exciting benefits included in your plan: device protection, Netflix on Us, and unlimited data."
+      ],
+      encouragements: [
+        "Excellent benefit education!"
+      ],
+    },
+    {
+      id: "collectPastDue",
+      name: "Collect Past Due Amount",
+      examples: [
+        "I see there's a past due balance on your account. Would you like to take care of that today?",
+        "To maintain uninterrupted service, let's address the outstanding balance on your account.",
+        "I noticed a payment is overdue. Can I help you settle this to keep your services active?"
+      ],
+      encouragements: [
+        "Effective financial resolution!"
+      ],
+    }
+  ];
+  
     // Helper function to get a random item from an array
     function getRandomItem(arr) {
         return arr[Math.floor(Math.random() * arr.length)];
