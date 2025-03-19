@@ -290,65 +290,72 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // End Call Session with Auto-Copy
-    endCallBtn.addEventListener("click", () => {
-        if (!currentCall) return;
+// End Call Session with Auto-Copy
+endCallBtn.addEventListener("click", () => {
+    if (!currentCall) return;
 
-        // Stop Timer
-        clearInterval(timerInterval);
-        currentCall.duration = elapsedSeconds; // Record duration in seconds
+    // Stop Timer
+    clearInterval(timerInterval);
+    currentCall.duration = elapsedSeconds; // Record duration in seconds
 
-        // Map behavior IDs to their full names
-        const behaviorNames = currentCall.behaviors.map(id => {
-            const behavior = behaviorsConfig.find(b => b.id === id);
-            return behavior ? behavior.name : id;
+    // Map behavior IDs to their full names with +1 suffix
+    const behaviorNames = currentCall.behaviors.map(id => {
+        const behavior = behaviorsConfig.find(b => b.id === id);
+        return behavior ? `${behavior.name} +1` : `${id} +1`;
+    });
+
+    // Construct Call Recap with each behavior on a new line
+    const minutes = Math.floor(currentCall.duration / 60);
+    const seconds = currentCall.duration % 60;
+    const formattedDuration = `${padZero(minutes)}:${padZero(seconds)}`;
+
+    // Join behaviors with comma and newline
+    const formattedBehaviors = behaviorNames.length > 0 
+        ? behaviorNames.join(",\n") + ","
+        : "None";
+        
+    let callRecap = `Call Recap:\n${formattedBehaviors}\nDuration: ${formattedDuration}\n\n`;
+    let fullRecap = `${cat}\n${callRecap}https://micah4thewin.github.io/calltracker/\n`;
+
+    // Copy Recap to Clipboard
+    navigator.clipboard
+        .writeText(fullRecap)
+        .then(() => {
+            Swal.fire({
+                icon: "success",
+                title: "Great job!",
+                text: "Call recap copied to clipboard!",
+                timer: 1200,
+                showConfirmButton: false,
+            });
+            console.log("Call recap copied to clipboard!");
+        })
+        .catch((err) => {
+            console.error("Error copying text: ", err);
         });
 
-        // Construct Call Recap
-        const minutes = Math.floor(currentCall.duration / 60);
-        const seconds = currentCall.duration % 60;
-        const formattedDuration = `${padZero(minutes)}:${padZero(seconds)}`;
+    // Reset and update UI
+    dailyData.calls.push(currentCall);
+    currentCall = null;
+    startCallBtn.classList.remove("active");
+    behaviorSection.classList.add("d-none");
+    resetBehaviorButtons();
+    summaryCards.forEach((card) => card.classList.remove("active"));
+    updateProgress();
+    updateSummary();
+    saveData();
 
-        let callRecap = `Call Recap:\n${behaviorNames.join(", ") || "None"}\nDuration: ${formattedDuration}\n\n`;
-        let fullRecap = `${cat}\nhttps://micah4thewin.github.io/calltracker/\n${callRecap}`;
+    // Reset background color after call ends
+    document.body.style.backgroundColor = "#f4f6f9";
 
-        // Copy Recap to Clipboard
-        navigator.clipboard
-            .writeText(fullRecap)
-            .then(() => {
-                Swal.fire({
-                    icon: "success",
-                    title: "Great job!",
-                    text: "Call recap copied to clipboard!",
-                    timer: 1200,
-                    showConfirmButton: false,
-                });
-                console.log("Call recap copied to clipboard!");
-            })
-            .catch((err) => {
-                console.error("Error copying text: ", err);
-            });
+    // Reset Timer Display
+    timerDisplay.textContent = "00:00";
+    timerDisplay.classList.remove("time-exceeded");
 
-        // Reset and update UI
-        dailyData.calls.push(currentCall);
-        currentCall = null;
-        startCallBtn.classList.remove("active");
-        behaviorSection.classList.add("d-none");
-        resetBehaviorButtons();
-        summaryCards.forEach((card) => card.classList.remove("active"));
-        updateProgress();
-        updateSummary();
-        saveData();
+    startCallCard.style.display = "block";
+    AOS.refresh(); // Refresh AOS to apply animations
+});
 
-        // Reset background color after call ends
-        document.body.style.backgroundColor = "#f4f6f9";
-
-        // Reset Timer Display
-        timerDisplay.textContent = "00:00";
-        timerDisplay.classList.remove("time-exceeded");
-
-        startCallCard.style.display = "block";
-        AOS.refresh(); // Refresh AOS to apply animations
-    });
 
     // Reset Behavior Buttons
     function resetBehaviorButtons() {
