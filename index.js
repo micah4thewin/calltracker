@@ -16,70 +16,71 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     AOS.init();
+    
+// Configuration Object for Behaviors
+const behaviorsConfig = [
+  {
+    id: "youSaveIntro",
+    name: "Use 'You Save' Introduction",
+    examples: [
+      "Thank you for calling T-Mobile, where you save. I'm a tech named Micah. How can I help you?",
+      "Welcome to T-Mobile, where you save. This is Micah. What can I assist you with today?",
+      "Hello, you've reached T-Mobile, where you save. I'm Micah. How may I support you?"
+    ],
+    encouragements: [
+      "Great job with the 'You Save' intro!"
+    ],
+  },
+  {
+    id: "recommendExperiencePlan",
+    name: "Recommend Experience Rate Plan",
+    examples: [
+      "I'd like to tell you about our new Experience rate plans, which include Satellite Services with Starlink, 250GB of hotspot data, Netflix on Us, Hulu on Us, and are 20% less expensive than AT&T or Verizon.",
+      "Have you heard about our Experience rate plans? They come with amazing benefits like Satellite Services via Starlink, 250GB hotspot, Netflix and Hulu on Us, all at 20% less than competitors like AT&T and Verizon.",
+      "Let me introduce you to our new Experience plans, featuring Satellite Services with Starlink, 250GB of hotspot, Netflix on Us, Hulu on Us, and savings of 20% compared to AT&T and Verizon."
+    ],
+    encouragements: [
+      "Excellent promotion of the Experience plan!"
+    ],
+  },
+  {
+    id: "highlightExistingBenefits",
+    name: "Highlight Existing T-Mobile Benefits",
+    examples: [
+      "Did you know your current T-Mobile plan includes great perks like Netflix on Us and Hulu on Us?",
+      "Your T-Mobile plan comes with valuable benefits such as Netflix on Us, Hulu on Us, and other exclusive perks.",
+      "Let me remind you of the amazing benefits in your T-Mobile plan, including Netflix on Us and Hulu on Us."
+    ],
+    encouragements: [
+      "Nice work showcasing T-Mobile value!"
+    ],
+  },
+  {
+    id: "tLifeAppLogin",
+    name: "Guide T-Life App Login",
+    examples: [
+      "Let's get you logged into the T-Life app so you can manage your account on the go.",
+      "Have you downloaded our T-Life app? I can help you log in right now.",
+      "The T-Life app gives you instant account access - let me guide you through the setup."
+    ],
+    encouragements: [
+      "Great job helping with app access!"
+    ],
+  },
+  {
+    id: "collectPastDue",
+    name: "Collect Past Due Amount",
+    examples: [
+      "I see there's a past due balance on your account. Would you like to take care of that today?",
+      "To maintain uninterrupted service, let's address the outstanding balance on your account.",
+      "I noticed a payment is overdue. Can I help you settle this to keep your services active?"
+    ],
+    encouragements: [
+      "Effective financial resolution!"
+    ],
+  }
+];
 
-  // Configuration Object for Behaviors
-  const behaviorsConfig = [
-    {
-      id: "fixFlow",
-      name: "Use the Fix Flow",
-      examples: [
-        "I'm following our Fix Flow to troubleshoot this systematically.",
-        "Let's use the Fix Flow to make sure we cover all bases.",
-        "The Fix Flow will guide us to the right solution."
-      ],
-      encouragements: [
-        "Nice work using the Fix Flow!"
-      ],
-    },
-    {
-      id: "personalGuarantee",
-      name: "Send Personal Guarantee SMS",
-      examples: [
-        "I'm sending you a quick text to assure you we've got this covered.",
-        "Here's a personal guarantee message to give you peace of mind.",
-        "I'll follow up with a text so you know we're committed to your satisfaction."
-      ],
-      encouragements: [
-        "Exemplary trust-building!"
-      ],
-    },
-    {
-      id: "tLifeAppLogin",
-      name: "Guide T-Life App Login",
-      examples: [
-        "Let's get you logged into the T-Life app so you can manage your account on the go.",
-        "Have you downloaded our T-Life app? I can help you log in right now.",
-        "The T-Life app gives you instant account access - let me guide you through the setup."
-      ],
-      encouragements: [
-        "Great job helping with app access!"
-      ],
-    },
-    {
-      id: "planBenefits",
-      name: "Highlight 3+ Plan Benefits",
-      examples: [
-        "Your plan includes three amazing benefits: unlimited streaming, international texting, and hotspot data.",
-        "Did you know your rate plan comes with premium video streaming, 5G access, and free international roaming?",
-        "Let me tell you about three exciting benefits included in your plan: device protection, Netflix on Us, and unlimited data."
-      ],
-      encouragements: [
-        "Excellent benefit education!"
-      ],
-    },
-    {
-      id: "collectPastDue",
-      name: "Collect Past Due Amount",
-      examples: [
-        "I see there's a past due balance on your account. Would you like to take care of that today?",
-        "To maintain uninterrupted service, let's address the outstanding balance on your account.",
-        "I noticed a payment is overdue. Can I help you settle this to keep your services active?"
-      ],
-      encouragements: [
-        "Effective financial resolution!"
-      ],
-    }
-  ];
   
     // Helper function to get a random item from an array
     function getRandomItem(arr) {
