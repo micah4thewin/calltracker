@@ -20,66 +20,49 @@ document.addEventListener("DOMContentLoaded", () => {
 // Configuration Object for Behaviors
 const behaviorsConfig = [
   {
-    id: "youSaveIntro",
-    name: "Use 'You Save' Introduction",
+    id: "talkAboutBalance",
+    name: "Talk about the customer's balance",
     examples: [
-      "Thank you for calling T-Mobile, where you save. I'm a tech named Micah. How can I help you?",
-      "Welcome to T-Mobile, where you save. This is Micah. What can I assist you with today?",
-      "Hello, you've reached T-Mobile, where you save. I'm Micah. How may I support you?"
+      "I see your account balance is [amount]. Let me review that with you.",
+      "Let me take a look at your current balance and recent charges to ensure everything looks correct.",
+      "I'm reviewing your account balance now - I see [amount] due on [date]."
     ],
     encouragements: [
-      "Great job with the 'You Save' intro!"
+      "Great work auditing the account!",
+      "Excellent balance review!",
+      "Nice job checking the customer's balance!"
     ],
   },
   {
-    id: "recommendExperiencePlan",
-    name: "Recommend Experience Rate Plan",
+    id: "utilizeNBA",
+    name: "Utilize NBA",
     examples: [
-      "I'd like to tell you about our new Experience rate plans, which include Satellite Services with Starlink, 250GB of hotspot data, Netflix on Us, Hulu on Us, and are 20% less expensive than AT&T or Verizon.",
-      "Have you heard about our Experience rate plans? They come with amazing benefits like Satellite Services via Starlink, 250GB hotspot, Netflix and Hulu on Us, all at 20% less than competitors like AT&T and Verizon.",
-      "Let me introduce you to our new Experience plans, featuring Satellite Services with Starlink, 250GB of hotspot, Netflix on Us, Hulu on Us, and savings of 20% compared to AT&T and Verizon."
+      "I see we have a Next Best Action recommendation for your account - let me review that with you.",
+      "Our system is suggesting an option that might benefit your account. Let me go through that.",
+      "I have an NBA recommendation here that could enhance your service."
     ],
     encouragements: [
-      "Excellent promotion of the Experience plan!"
+      "Great job using NBA!",
+      "Excellent NBA disposition!",
+      "Nice work leveraging NBA!"
     ],
   },
   {
-    id: "highlightExistingBenefits",
-    name: "Highlight Existing T-Mobile Benefits",
+    id: "utilizeExpertHeadStart",
+    name: "Utilize expert head start",
     examples: [
-      "Did you know your current T-Mobile plan includes great perks like Netflix on Us and Hulu on Us?",
-      "Your T-Mobile plan comes with valuable benefits such as Netflix on Us, Hulu on Us, and other exclusive perks.",
-      "Let me remind you of the amazing benefits in your T-Mobile plan, including Netflix on Us and Hulu on Us."
+      "I'm reviewing the Expert Head Start suggestions for your account.",
+      "Our Expert Head Start tool is showing some recommendations for your situation.",
+      "Let me check the Expert Head Start insights for your account."
     ],
     encouragements: [
-      "Nice work showcasing T-Mobile value!"
-    ],
-  },
-  {
-    id: "tLifeAppLogin",
-    name: "Guide T-Life App Login",
-    examples: [
-      "Let's get you logged into the T-Life app so you can manage your account on the go.",
-      "Have you downloaded our T-Life app? I can help you log in right now.",
-      "The T-Life app gives you instant account access - let me guide you through the setup."
-    ],
-    encouragements: [
-      "Great job helping with app access!"
-    ],
-  },
-  {
-    id: "collectPastDue",
-    name: "Collect Past Due Amount",
-    examples: [
-      "I see there's a past due balance on your account. Would you like to take care of that today?",
-      "To maintain uninterrupted service, let's address the outstanding balance on your account.",
-      "I noticed a payment is overdue. Can I help you settle this to keep your services active?"
-    ],
-    encouragements: [
-      "Effective financial resolution!"
+      "Excellent use of Expert Head Start!",
+      "Great job utilizing expert tools!",
+      "Nice work with Expert Head Start!"
     ],
   }
 ];
+
 
   
     // Helper function to get a random item from an array
