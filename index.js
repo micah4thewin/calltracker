@@ -16,55 +16,48 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     AOS.init();
-    
-// Configuration Object for Behaviors
+
+// ─── Action Plan: 7-Day FCR Focus (Coaching 03/10/26) ───────────────────────
+// Focus Behavior: Restate the issue + get verbal confirmation at the start of
+// every call. Optional extra credit: "I want to make sure you don't have to
+// call back."
+// ─────────────────────────────────────────────────────────────────────────────
+
 const behaviorsConfig = [
   {
-    id: "talkAboutBalance",
-    name: "Talk about the customer's balance",
+    id: "restateIssue",
+    name: "Restate issue & get verbal confirmation",
     examples: [
-      "I see your account balance is [amount]. Let me review that with you.",
-      "Let me take a look at your current balance and recent charges to ensure everything looks correct.",
-      "I'm reviewing your account balance now - I see [amount] due on [date]."
+      "So just to make sure I understand, you're calling in because [issue] — is that right?",
+      "I want to confirm — you're reaching out today about [issue], correct?",
+      "Let me restate what you've told me: [issue]. Does that sound right?",
+      "So what I'm hearing is [issue] — am I understanding that correctly?"
     ],
     encouragements: [
-      "Great work auditing the account!",
-      "Excellent balance review!",
-      "Nice job checking the customer's balance!"
+      "Great restate! That's 7-day FCR gold! 🏆",
+      "Nice job confirming the issue upfront!",
+      "Excellent verbal confirmation — keep it up!",
+      "That's exactly the behavior! Way to nail the restate!"
     ],
   },
   {
-    id: "utilizeNBA",
-    name: "Utilize NBA",
+    id: "dontHaveToCallBack",
+    name: "\"I want to make sure you don't have to call back\" (+extra credit)",
     examples: [
-      "I see we have a Next Best Action recommendation for your account - let me review that with you.",
-      "Our system is suggesting an option that might benefit your account. Let me go through that.",
-      "I have an NBA recommendation here that could enhance your service."
+      "I want to make sure you don't have to call back, so let me take care of everything for you today.",
+      "My goal is to get this fully resolved so you don't have to call back.",
+      "I want to make sure you don't have to call back — let's make sure we cover everything.",
+      "Let me make sure we get this 100% taken care of so you don't have to call back."
     ],
     encouragements: [
-      "Great job using NBA!",
-      "Excellent NBA disposition!",
-      "Nice work leveraging NBA!"
-    ],
-  },
-  {
-    id: "utilizeExpertHeadStart",
-    name: "Utilize expert head start",
-    examples: [
-      "I'm reviewing the Expert Head Start suggestions for your account.",
-      "Our Expert Head Start tool is showing some recommendations for your situation.",
-      "Let me check the Expert Head Start insights for your account."
-    ],
-    encouragements: [
-      "Excellent use of Expert Head Start!",
-      "Great job utilizing expert tools!",
-      "Nice work with Expert Head Start!"
+      "Extra credit earned! 🌟 That phrase is a game-changer for FCR!",
+      "Boom! That's the line that keeps customers from calling back!",
+      "That extra credit phrase is so powerful — great job!",
+      "You're building trust and reducing callbacks — amazing!"
     ],
   }
 ];
 
-
-  
     // Helper function to get a random item from an array
     function getRandomItem(arr) {
         return arr[Math.floor(Math.random() * arr.length)];
@@ -86,8 +79,8 @@ const behaviorsConfig = [
     const callIdInput = document.getElementById("callId");
     const summaryCards = document.querySelectorAll(".summary-card");
     const startCallCard = document.getElementById("startCallCard");
-    const clearHistoryBtn = document.getElementById("clearHistoryBtn"); // Assuming there is a clearHistoryBtn
-    const timerDisplay = document.getElementById("callTimer"); // New Timer Element
+    const clearHistoryBtn = document.getElementById("clearHistoryBtn");
+    const timerDisplay = document.getElementById("callTimer");
 
     let currentCall = null;
     let dailyData = {
@@ -100,7 +93,6 @@ const behaviorsConfig = [
     // Update Progress Bar
     function updateProgress() {
         if (!currentCall) {
-            // Reset progress bar when no call is active
             const progressBar = document.getElementById("behaviorProgress");
             progressBar.style.width = "0%";
             progressBar.setAttribute("aria-valuenow", 0);
@@ -125,13 +117,19 @@ const behaviorsConfig = [
             const data = await localforage.getItem("dailyData");
             if (data) {
                 dailyData = data;
+                // Ensure new behavior keys exist if loading old data
+                behaviorsConfig.forEach((b) => {
+                    if (!(b.id in dailyData.behaviors)) {
+                        dailyData.behaviors[b.id] = 0;
+                    }
+                });
             } else {
                 dailyData.behaviors = {};
                 behaviorsConfig.forEach((b) => {
                     dailyData.behaviors[b.id] = 0;
                 });
-                updateSummary(); // Ensure updateSummary() is called after data is loaded or initialized
             }
+            updateSummary();
         } catch (error) {
             console.error("Error loading data:", error);
         }
@@ -141,6 +139,7 @@ const behaviorsConfig = [
 
     // Render Behavior Buttons
     function renderBehaviors() {
+        behaviorsList.innerHTML = "";
         behaviorsConfig.forEach((behavior) => {
             const btn = document.createElement("button");
             btn.classList.add("btn", "behavior-btn", "btn-outline-primary");
@@ -160,9 +159,8 @@ const behaviorsConfig = [
         if (!currentCall.behaviors.includes(id)) {
             currentCall.behaviors.push(id);
             button.classList.add("active");
-            dailyData.behaviors[id] += 1;
+            dailyData.behaviors[id] = (dailyData.behaviors[id] || 0) + 1;
 
-            // Display encouraging statement
             Swal.fire({
                 icon: "success",
                 title: getRandomItem(behavior.encouragements),
@@ -175,7 +173,7 @@ const behaviorsConfig = [
         } else {
             currentCall.behaviors = currentCall.behaviors.filter((b) => b !== id);
             button.classList.remove("active");
-            dailyData.behaviors[id] -= 1;
+            dailyData.behaviors[id] = Math.max(0, (dailyData.behaviors[id] || 1) - 1);
             if (currentCall.behaviors.length === 0) {
                 summaryCards.forEach((card) => card.classList.remove("active"));
             }
@@ -213,29 +211,27 @@ const behaviorsConfig = [
         currentCall = {
             id: callId,
             behaviors: [],
-            duration: 0, // Initialize duration
+            duration: 0,
         };
 
-        // Start Timer
-        startTimer();
+        // Prompt reminder for action plan behavior at call start
+        Swal.fire({
+            icon: "info",
+            title: "📋 Action Plan Reminder",
+            html: `<strong>Restate the issue</strong> and get <strong>verbal confirmation</strong> right at the start!<br><br><em>"I want to make sure you don't have to call back."</em>`,
+            position: "top",
+            timer: 5000,
+            showConfirmButton: false,
+            toast: false,
+        });
 
-        // Add active class to change button color
+        startTimer();
         startCallBtn.classList.add("active");
         behaviorSection.classList.remove("d-none");
         callIdInput.value = "";
-        Swal.fire({
-            icon: "success",
-            title: "Success",
-            text: "Call session started.",
-            timer: 2000,
-            showConfirmButton: false,
-        });
-        updateProgress();
-
-        // Change background color when call is active
-        document.body.style.backgroundColor = "#e2f0cb"; // Calm green color
-
+        document.body.style.backgroundColor = "#e2f0cb";
         startCallCard.style.display = "none";
+        updateProgress();
     });
 
     // Start Timer Function
@@ -247,7 +243,6 @@ const behaviorsConfig = [
             updateTimerDisplay();
 
             if (elapsedSeconds === 15 * 60) {
-                // 15 minutes reached
                 Swal.fire({
                     icon: "info",
                     title: "15 Minutes Reached",
@@ -255,7 +250,6 @@ const behaviorsConfig = [
                     timer: 3000,
                     showConfirmButton: false,
                 });
-                // Change timer color to indicate time exceeded
                 timerDisplay.classList.add("time-exceeded");
             }
         }, 1000);
@@ -274,72 +268,71 @@ const behaviorsConfig = [
     }
 
     // End Call Session with Auto-Copy
-// End Call Session with Auto-Copy
-endCallBtn.addEventListener("click", () => {
-    if (!currentCall) return;
+    endCallBtn.addEventListener("click", () => {
+        if (!currentCall) return;
 
-    // Stop Timer
-    clearInterval(timerInterval);
-    currentCall.duration = elapsedSeconds; // Record duration in seconds
+        clearInterval(timerInterval);
+        currentCall.duration = elapsedSeconds;
 
-    // Map behavior IDs to their full names with +1 suffix
-    const behaviorNames = currentCall.behaviors.map(id => {
-        const behavior = behaviorsConfig.find(b => b.id === id);
-        return behavior ? `${behavior.name} +1` : `${id} +1`;
-    });
-
-    // Construct Call Recap with each behavior on a new line
-    const minutes = Math.floor(currentCall.duration / 60);
-    const seconds = currentCall.duration % 60;
-    const formattedDuration = `${padZero(minutes)}:${padZero(seconds)}`;
-
-    // Join behaviors with comma and newline
-    const formattedBehaviors = behaviorNames.length > 0 
-        ? behaviorNames.join(",\n") + ","
-        : "None";
-        
-    let callRecap = `Call Recap:\n${formattedBehaviors}\nDuration: ${formattedDuration}\n\n`;
-    let fullRecap = `${cat}\n${callRecap}https://micah4thewin.github.io/calltracker/\n`;
-
-    // Copy Recap to Clipboard
-    navigator.clipboard
-        .writeText(fullRecap)
-        .then(() => {
-            Swal.fire({
-                icon: "success",
-                title: "Great job!",
-                text: "Call recap copied to clipboard!",
-                timer: 1200,
-                showConfirmButton: false,
-            });
-            console.log("Call recap copied to clipboard!");
-        })
-        .catch((err) => {
-            console.error("Error copying text: ", err);
+        const behaviorNames = currentCall.behaviors.map(id => {
+            const behavior = behaviorsConfig.find(b => b.id === id);
+            return behavior ? `${behavior.name} +1` : `${id} +1`;
         });
 
-    // Reset and update UI
-    dailyData.calls.push(currentCall);
-    currentCall = null;
-    startCallBtn.classList.remove("active");
-    behaviorSection.classList.add("d-none");
-    resetBehaviorButtons();
-    summaryCards.forEach((card) => card.classList.remove("active"));
-    updateProgress();
-    updateSummary();
-    saveData();
+        const minutes = Math.floor(currentCall.duration / 60);
+        const seconds = currentCall.duration % 60;
+        const formattedDuration = `${padZero(minutes)}:${padZero(seconds)}`;
 
-    // Reset background color after call ends
-    document.body.style.backgroundColor = "#f4f6f9";
+        const formattedBehaviors = behaviorNames.length > 0
+            ? behaviorNames.join(",\n") + ","
+            : "None";
 
-    // Reset Timer Display
-    timerDisplay.textContent = "00:00";
-    timerDisplay.classList.remove("time-exceeded");
+        // FCR score for this call
+        const didRestate = currentCall.behaviors.includes("restateIssue");
+        const didExtraCredit = currentCall.behaviors.includes("dontHaveToCallBack");
+        let fcrNote = "";
+        if (didRestate && didExtraCredit) {
+            fcrNote = "✅ Full action plan completed (restate + extra credit)";
+        } else if (didRestate) {
+            fcrNote = "✅ Restate completed | ⭐ Try adding \"don't have to call back\" next time!";
+        } else {
+            fcrNote = "⚠️ Remember to restate the issue & get verbal confirmation next call!";
+        }
 
-    startCallCard.style.display = "block";
-    AOS.refresh(); // Refresh AOS to apply animations
-});
+        let callRecap = `Call Recap:\n${formattedBehaviors}\nDuration: ${formattedDuration}\n${fcrNote}\n\n`;
+        let fullRecap = `${cat}\n${callRecap}https://micah4thewin.github.io/calltracker/\n`;
 
+        navigator.clipboard
+            .writeText(fullRecap)
+            .then(() => {
+                Swal.fire({
+                    icon: "success",
+                    title: "Great job!",
+                    text: "Call recap copied to clipboard!",
+                    timer: 1200,
+                    showConfirmButton: false,
+                });
+            })
+            .catch((err) => {
+                console.error("Error copying text: ", err);
+            });
+
+        dailyData.calls.push(currentCall);
+        currentCall = null;
+        startCallBtn.classList.remove("active");
+        behaviorSection.classList.add("d-none");
+        resetBehaviorButtons();
+        summaryCards.forEach((card) => card.classList.remove("active"));
+        updateProgress();
+        updateSummary();
+        saveData();
+
+        document.body.style.backgroundColor = "#f4f6f9";
+        timerDisplay.textContent = "00:00";
+        timerDisplay.classList.remove("time-exceeded");
+        startCallCard.style.display = "block";
+        AOS.refresh();
+    });
 
     // Reset Behavior Buttons
     function resetBehaviorButtons() {
@@ -392,7 +385,7 @@ endCallBtn.addEventListener("click", () => {
             return;
         }
 
-        let summary = "T-Mobile Call Center Summary\n\n";
+        let summary = "T-Mobile Call Center Summary\nAction Plan Focus: 7-Day FCR\n\n";
         dailyData.calls.forEach((call) => {
             const callDurationMinutes = Math.floor(call.duration / 60);
             const callDurationSeconds = call.duration % 60;
@@ -402,7 +395,6 @@ endCallBtn.addEventListener("click", () => {
             summary += `Duration: ${formattedDuration}\n\n`;
         });
 
-        // Add overall statistics
         summary += "Daily Summary:\n";
         summary += `Total Calls: ${dailyData.calls.length}\n`;
         behaviorsConfig.forEach((behavior) => {
@@ -411,7 +403,6 @@ endCallBtn.addEventListener("click", () => {
             summary += `${behavior.name}: ${percentage}%\n`;
         });
 
-        // Create a blob and download
         const blob = new Blob([summary], { type: "text/plain" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
@@ -477,7 +468,6 @@ endCallBtn.addEventListener("click", () => {
         }
     });
 
-    // Call updateProgress on page load and every time a behavior is toggled
     window.addEventListener("DOMContentLoaded", updateProgress);
     behaviorsList.addEventListener("click", updateProgress);
 
@@ -485,6 +475,5 @@ endCallBtn.addEventListener("click", () => {
 const cat = `
 (｡◕‿◕｡)
 `;
-
 
 });
