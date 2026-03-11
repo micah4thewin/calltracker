@@ -117,7 +117,6 @@ const behaviorsConfig = [
             const data = await localforage.getItem("dailyData");
             if (data) {
                 dailyData = data;
-                // Ensure new behavior keys exist if loading old data
                 behaviorsConfig.forEach((b) => {
                     if (!(b.id in dailyData.behaviors)) {
                         dailyData.behaviors[b.id] = 0;
@@ -214,17 +213,6 @@ const behaviorsConfig = [
             duration: 0,
         };
 
-        // Prompt reminder for action plan behavior at call start
-        Swal.fire({
-            icon: "info",
-            title: "📋 Action Plan Reminder",
-            html: `<strong>Restate the issue</strong> and get <strong>verbal confirmation</strong> right at the start!<br><br><em>"I want to make sure you don't have to call back."</em>`,
-            position: "top",
-            timer: 5000,
-            showConfirmButton: false,
-            toast: false,
-        });
-
         startTimer();
         startCallBtn.classList.add("active");
         behaviorSection.classList.remove("d-none");
@@ -287,7 +275,6 @@ const behaviorsConfig = [
             ? behaviorNames.join(",\n") + ","
             : "None";
 
-        // FCR score for this call
         const didRestate = currentCall.behaviors.includes("restateIssue");
         const didExtraCredit = currentCall.behaviors.includes("dontHaveToCallBack");
         let fcrNote = "";
