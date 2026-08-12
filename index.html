@@ -1,88 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>T-Mobile Call Center Tracker</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- AOS CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-    <!-- SweetAlert2 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="style.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Call Tracker — Arcade Edition</title>
+<meta name="description" content="A local-only, gamified call tracker for T-Mobile care, tech support and Team of Experts. No servers, no analytics, no network requests.">
+<meta name="color-scheme" content="dark">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23e20074'/%3E%3Cpath d='M7 9h18v5h-6v14h-6V14H7z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Micah's Call Tracker</a>
-        </div>
-    
-        <!-- Add this div to hold the button -->
-        <div class="d-flex justify-content-end me-3">
-            <button id="clearHistoryBtn" class="btn btn-danger">Clear History</button>
-        </div>
-    </nav>
-    <div class="container" data-aos="fade-up">
-        <!-- Call Session Input -->
-        <div id="startCallCard" class="card mb-4 summary-card">
-            <div class="card-body">
-                <h5 class="card-title">Start a Call Session</h5>
-                <div class="mb-3">
-                    <label for="callId" class="form-label">Account Number / ID</label>
-                    <input type="text" class="form-control" id="callId" placeholder="Enter Account Number, Note, or Phone Number">
-                </div>
-                <button id="startCallBtn" class="btn btn-dark w-100">Start Call</button>
-            </div>
-        </div>
+<body class="mode-idle">
 
-        <!-- Behavior Selection -->
-        <div id="behaviorSection" class="card mb-4 summary-card d-none">
-            <div class="card-body">
-                <h5 class="card-title">Select Behaviors Performed</h5>
-                <div id="behaviorsList" class="d-flex flex-wrap">
-                    <!-- Behavior buttons will be injected here -->
-                </div>
-                <button id="endCallBtn" class="btn btn-dark mt-3 w-100">End Call</button>
-            </div>
-            <div class="mt-4">
-                <div class="progress">
-                    <div id="behaviorProgress" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  
-                <span class="fs-5">Behaviors Completed: <span id="behaviorCount">0</span> / <span id="totalBehaviors">7</span></span>
-            </div>
-        </div>
-            <!-- Call Timer Display -->
-            <div id="timerContainer" class="text-center my-3">
-                <span id="callTimer" class="timer">00:00</span>
-            </div>
-<!-- Summary Dashboard -->
-<div class="card summary-card bg-secondary text-white">
-    <div class="card-body">
-        <h5 class="card-title">Daily Summary</h5>
-        <div class="d-flex bg-secondary text-white justify-content-between align-items-center mb-3">
-            <span>Total Calls:</span>
-            <span id="totalCalls" class="display-4 fw-bold">0</span>
-        </div>
-        <h6>Behavior Completion:</h6>
-        <ul id="behaviorStats" class="list-group mb-3"></ul>
-        <button id="downloadBtn" class="btn btn-light w-100 text-dark">Download Summary</button>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand__mark" aria-hidden="true">◤</span>
+    <span class="brand__name">CALL<em>TRACKER</em></span>
+    <span class="brand__tag">arcade edition</span>
+  </div>
+
+  <div class="rank">
+    <div class="rank__badge"><span id="rankBadge">1</span></div>
+    <div class="rank__meta">
+      <div class="rank__title" id="rankTitle">Rookie Rep</div>
+      <div class="rank__bar"><div class="rank__fill" id="xpFill"></div></div>
+      <div class="rank__xp" id="xpText">0 XP</div>
     </div>
-</div>
+  </div>
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- AOS JS -->
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <!-- SweetAlert2 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- LocalForage JS -->
-    <script src="https://cdn.jsdelivr.net/npm/localforage@1.10.0/dist/localforage.min.js"></script>
-    <!-- Main JS -->
-    <script src="index.js"></script>
+  <div class="topstats">
+    <div class="tstat"><b id="statCalls">0</b><small>calls today</small></div>
+    <div class="tstat"><b id="statScore">0%</b><small>avg score</small></div>
+    <div class="tstat"><b id="statResolved">0%</b><small>resolved</small></div>
+    <div class="tstat tstat--streak"><b><span id="streakFlame" class="flame">🔥</span><span id="statStreak">0</span></b><small>core streak</small></div>
+  </div>
+
+  <div class="topactions">
+    <button id="btnReport" class="btn btn--primary" type="button">Debrief</button>
+    <button id="btnSound" class="btn btn--icon" type="button" aria-label="Toggle sound">🔇</button>
+    <button id="btnHelp" class="btn btn--icon" type="button" aria-label="Help and shortcuts">?</button>
+    <button id="btnSettings" class="btn btn--icon" type="button" aria-label="Settings">⚙</button>
+  </div>
+</header>
+
+<main class="stage">
+
+  <!-- ── CALL CONSOLE ────────────────────────────────────────────── -->
+  <section class="panel panel--console" aria-label="Call console">
+
+    <div id="idleView">
+      <h2 class="panel__title">Start a call</h2>
+
+      <label class="lbl" for="callIdInput">Account number, phone number, or any reference</label>
+      <input id="callIdInput" class="field field--lg" type="text" autocomplete="off" spellcheck="false"
+             placeholder="e.g. 555-0134 · 987654321 · &quot;angry guy, no acct&quot;">
+      <p class="hint" id="idHint">Blank is fine — the call logs as an unidentified caller.</p>
+
+      <div id="priorPreview" hidden></div>
+
+      <div id="intakeQuestions" class="intakes"></div>
+
+      <label class="lbl">Why are they calling?</label>
+      <div id="reasonChips" class="chipgrid"></div>
+
+      <button id="startCallBtn" class="btn btn--start" type="button">
+        <span>START CALL</span><kbd>Enter</kbd>
+      </button>
+    </div>
+
+    <div id="liveView" hidden>
+      <div class="live__timer">
+        <div id="callTimer" class="timer">00:00</div>
+        <div class="live__timerside">
+          <span id="holdReadout" class="holdreadout"></span>
+          <button id="btnHold" class="btn btn--ghost btn--sm" type="button">⏸ Hold</button>
+        </div>
+      </div>
+
+      <div class="live__who">
+        <span id="liveId" class="live__id">Unidentified caller</span>
+        <span id="liveRepeat" class="badge badge--warn" hidden>REPEAT</span>
+      </div>
+
+      <button id="liveReasonBtn" class="reasonbtn" type="button">
+        <span class="reasonbtn__label">Reason</span>
+        <span id="liveReasonLabel" class="reasonbtn__value">Pick a reason</span>
+      </button>
+
+      <div class="live__fields">
+        <label class="lbl lbl--sm" for="liveSub">Specifics (one line)</label>
+        <input id="liveSub" class="field field--sm" type="text" placeholder="e.g. proration after plan change">
+        <label class="lbl lbl--sm" for="liveTenure">Tenure (years)</label>
+        <input id="liveTenure" class="field field--sm" type="number" min="0" max="60" step="1" placeholder="—">
+      </div>
+
+      <h3 class="panel__sub">Account facts</h3>
+      <div id="flagList" class="flags"></div>
+
+      <label class="lbl lbl--sm" for="liveNotes">Notes for next time</label>
+      <textarea id="liveNotes" class="field field--area" rows="3"
+                placeholder="What you did, what is still open. This shows up if they call back."></textarea>
+
+      <button id="endCallBtn" class="btn btn--end" type="button">
+        <span>END CALL</span><kbd>X</kbd>
+      </button>
+    </div>
+  </section>
+
+  <!-- ── QUEST BOARD ─────────────────────────────────────────────── -->
+  <section class="panel panel--board" aria-label="Behavior board">
+    <header class="boardhead">
+      <div class="ring" id="progressRing" style="--pct:0">
+        <span class="ring__pct" id="progressPct">0%</span>
+      </div>
+      <div class="boardhead__meta">
+        <h2 class="panel__title panel__title--flush">Behavior board</h2>
+        <div class="boardhead__count"><span id="progressCount">0 / 0</span> <span id="momentum" class="momentum"></span></div>
+        <div class="coretrack" id="coreTrack" title="The CORE 5"></div>
+      </div>
+    </header>
+
+    <div id="nudge" class="nudge" hidden></div>
+    <div id="board" class="board"></div>
+  </section>
+
+  <!-- ── RAIL ────────────────────────────────────────────────────── -->
+  <aside class="panel panel--rail" aria-label="Quick actions">
+    <h2 class="panel__title panel__title--alarm">Emergency help</h2>
+    <p class="hint">One click copies a ready-to-paste Teams message. Pencil edits it.</p>
+    <div id="sosList" class="soslist"></div>
+    <button id="btnCopyLast" class="btn btn--ghost btn--block btn--sm" type="button">Copy last call recap</button>
+
+    <h2 class="panel__title">Daily quests</h2>
+    <div id="questList" class="quests"></div>
+
+    <h2 class="panel__title">Trophies <span id="trophyCount" class="panel__badge">0/0</span></h2>
+    <div id="trophyStrip" class="trophies"></div>
+  </aside>
+
+  <!-- ── DASHBOARD ───────────────────────────────────────────────── -->
+  <section class="panel panel--dash" aria-label="Dashboard">
+    <header class="dashhead">
+      <h2 class="panel__title panel__title--flush">Where you stand</h2>
+      <div class="dashhead__tools">
+        <select id="dashScope" class="field field--sm" aria-label="Time window">
+          <option value="today">Today</option>
+          <option value="week" selected>Last 7 days</option>
+          <option value="month">Last 30 days</option>
+          <option value="all">All time</option>
+        </select>
+        <button id="btnDashReport" class="btn btn--ghost btn--sm" type="button">Open debrief</button>
+      </div>
+    </header>
+
+    <div id="statTiles" class="tiles"></div>
+
+    <div class="dashcols">
+      <div>
+        <h3 class="panel__sub">Behavior consistency</h3>
+        <div id="adoptionBars" class="bars"></div>
+      </div>
+      <div>
+        <h3 class="panel__sub">Why they called</h3>
+        <div id="reasonBars" class="bars"></div>
+      </div>
+    </div>
+
+    <p class="storagenote" id="storageNote"></p>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>Call Tracker v3 · GPL-3.0 · Micah Levason</span>
+  <span class="footer__privacy">🔒 No server · no analytics · no network requests · everything stays in this browser</span>
+</footer>
+
+<div id="toasts" class="toasts" aria-live="polite"></div>
+<div id="modalRoot"></div>
+
+<noscript>
+  <p class="noscript">Call Tracker needs JavaScript. It runs entirely in your browser — nothing is sent anywhere.</p>
+</noscript>
+
+<script src="js/config.js"></script>
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/report.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
